@@ -5,7 +5,8 @@ const initialHotColdState = {
 	playerGuess: null,
 	computerChoice: null,
 	numberOfGuesses: 0,
-	guessedNumbers: []
+	guessedNumbers: [],
+	feedback: null
 };
 
 export const hotColdReducer = (state=initialHotColdState, action) => {
