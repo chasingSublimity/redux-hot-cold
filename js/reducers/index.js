@@ -1,22 +1,25 @@
 import * as actions from '../actions/index';
+import handleFeedback from './handleFeedback';
 
 const initialHotColdState = {
 	showInstructions: false,
 	playerGuess: null,
-	computerChoice: null,
+	computerChoice: Math.round(Math.random()*(100-1) + 1),
 	numberOfGuesses: 0,
 	guessedNumbers: [],
-	feedback: null
+	feedback: '',
+	guessInputValue: ''
 };
 
 export const hotColdReducer = (state=initialHotColdState, action) => {
 	let newState = {};
+	let feedback;
 
 	switch (action.type) {
 
 	case actions.START_NEW_GAME:
-		newState = Object.assign({}, state, 
-										{computerChoice: Math.random()*(100-1) + 1});
+		newState = Object.assign({}, initialHotColdState, 
+										{computerChoice: Math.round(Math.random()*(100-1) + 1)});
 		return newState;
 
 	case actions.GET_INSTRUCTIONS:
@@ -27,11 +30,18 @@ export const hotColdReducer = (state=initialHotColdState, action) => {
 		newState = Object.assign({}, state, {showInstructions: false});
 		return newState;
 
+	case actions.CHANGE_INPUT:
+		newState = Object.assign({}, state, {guessInputValue: action.value});
+		return newState;
+
 	case actions.GUESS_NUMBER:
+		feedback = handleFeedback(state.computerChoice, action.number);
 		newState = Object.assign({}, state, 
 															{playerGuess: action.number}, 
 															{guessedNumbers: [...state.guessedNumbers, action.number]},
-															{numberOfGuesses: (state.numberOfGuesses) + 1}
+															{numberOfGuesses: (state.numberOfGuesses) + 1},
+															{feedback: feedback},
+															{guessInputValue: ''}
 															);
 		return newState;
 

@@ -16,6 +16,13 @@ export const hideInstructions = () =>({
 	type: HIDE_INSTRUCTIONS
 });
 
+// change form input
+export const CHANGE_INPUT = 'CHANGE_INPUT';
+export const changeInput = value =>({
+	type: CHANGE_INPUT, 
+	value
+});
+
 // guess number
 export const GUESS_NUMBER = 'GUESS_NUMBER';
 export const guessNumber = number =>({
