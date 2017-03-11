@@ -1,6 +1,6 @@
 import React from 'react';
 
-function GuessBank(props) {
+export default function GuessBank(props) {
 
 	const guesses = props.guessedNumbers.map((guess, i) => {
 		return <li key={i}>{guess}</li>;
@@ -12,7 +12,3 @@ function GuessBank(props) {
 		</div>
 	);
 }
-
-
-
-export default GuessBank;

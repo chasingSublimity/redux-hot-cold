@@ -5,9 +5,10 @@ import * as actions from '../actions/index';
 export class GuessForm extends React.Component {
 	constructor(props) {
 		super(props);
-
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleClickFetch = this.handleClickFetch.bind(this);
+		this.handleClickPost = this.handleClickPost.bind(this);
 	}
 
 	handleChange(event) {
@@ -21,6 +22,16 @@ export class GuessForm extends React.Component {
 		this.props.dispatch(actions.guessNumber(submittedValue));
 	}
 
+	handleClickFetch(event) {
+		event.preventDefault();
+		this.props.dispatch(actions.fetchFewestGuesses());
+	}
+
+	handleClickPost(event) {
+		event.preventDefault();
+		this.props.dispatch(actions.postFewestGuesses(this.props.numberOfGuesses));
+	}
+
 	render() {
 		return(
 			<div className="guess-form">
@@ -28,20 +39,19 @@ export class GuessForm extends React.Component {
 				<input autoComplete="off" type="text" id="userGuess" value={this.props.guessInputValue} onChange={this.handleChange} />
 					<input type="submit" id="guessButton"/>
 				</form>
-				<p> Guess #<span id="count">{this.props.numberOfGuesses}</span>!</p>
+				<p>Guess #<span id="count">{this.props.numberOfGuesses}</span>!</p>
+				<p>Fewest Guessses = <span id="fewest-guesses">{this.props.fewestGuesses}</span>!</p>
+				<button onClick={this.handleClickFetch}>Fetch Guesses</button>
+				<button onClick={this.handleClickPost}>Post Guesses</button>
 			</div>
 		);
 	}
 }
 
 const mapStateToProps = (state, props) => ({
-	showInstructions: state.showInstructions,
-	playerGuess: state.playerGuess,
-	computerChoice: state.computerChoice,
 	numberOfGuesses: state.numberOfGuesses,
-	guessedNumbers: state.guessedNumbers,
-	feedback: state.feedback,
-	guessInputValue: state.guessInputValue
+	guessInputValue: state.guessInputValue,
+	fewestGuesses: state.fewestGuesses
 });
 
 export default connect(mapStateToProps)(GuessForm);

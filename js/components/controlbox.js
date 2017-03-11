@@ -1,10 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
 import GuessBank from './guessbank';
 import GuessForm from './guessform';
 import FeedbackBox from './feedbackbox';
-
 import * as actions from '../actions/index';
 
 export class ControlBox extends React.Component {
@@ -15,7 +13,7 @@ export class ControlBox extends React.Component {
 	render() {
 		return(
 			<div className="control-box">
-				<FeedbackBox feedback={this.props.feedback}/>
+				<FeedbackBox feedback={this.props.feedback} fewestGuesses={this.props.fewestGuesses}/>
 				<GuessForm numberOfGuesses={this.props.numberOfGuesses} />
 				<GuessBank guessedNumbers={this.props.guessedNumbers} />
 			</div>
@@ -24,13 +22,10 @@ export class ControlBox extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-	showInstructions: state.showInstructions,
-	playerGuess: state.playerGuess,
-	computerChoice: state.computerChoice,
 	numberOfGuesses: state.numberOfGuesses,
 	guessedNumbers: state.guessedNumbers,
 	feedback: state.feedback,
-	guessInputValue: state.guessInputValue
+	fewestGuesses: state.fewestGuesses
 });
 
 export default connect(mapStateToProps)(ControlBox);

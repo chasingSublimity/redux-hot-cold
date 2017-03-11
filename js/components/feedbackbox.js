@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FeedbackBox(props) {
+export default function FeedbackBox(props) {
 
 	return (
 		<div className="feedback">
@@ -8,5 +8,3 @@ function FeedbackBox(props) {
 		</div>
 	);
 }
-
-export default FeedbackBox;

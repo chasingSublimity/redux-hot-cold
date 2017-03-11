@@ -1,7 +1,4 @@
 import React from 'react';
-import GuessBank from './guessbank';
-import GuessForm from './guessform';
-import FeedbackBox from './feedbackbox';
 import ControlBox from './controlbox';
 import Header from './header';
 

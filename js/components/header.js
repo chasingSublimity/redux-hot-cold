@@ -24,14 +24,5 @@ export class Header extends React.Component {
 	}
 }
 
-const mapStateToProps = (state, props) => ({
-	showInstructions: state.showInstructions,
-	playerGuess: state.playerGuess,
-	computerChoice: state.computerChoice,
-	numberOfGuesses: state.numberOfGuesses,
-	guessedNumbers: state.guessedNumbers,
-	feedback: state.feedback,
-	guessInputValue: state.guessInputValue
-});
 
-export default connect(mapStateToProps)(Header);
+export default connect()(Header);
