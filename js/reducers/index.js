@@ -7,7 +7,7 @@ const initialHotColdState = {
 	computerChoice: Math.round(Math.random()*(100-1) + 1),
 	numberOfGuesses: 0,
 	guessedNumbers: [],
-	feedback: '',
+	feedback: 'Make your guess below!',
 	guessInputValue: '',
 };
 
@@ -37,7 +37,7 @@ export const hotColdReducer = (state=initialHotColdState, action) => {
 		return newState;
 
 	case actions.GUESS_NUMBER:
-		feedback = handleFeedback(state.computerChoice, action.number);
+		feedback = handleFeedback(state.computerChoice, action.number, state.numberOfGuesses);
 		newState = Object.assign({}, state, 
 															{playerGuess: action.number}, 
 															{guessedNumbers: [...state.guessedNumbers, action.number]},
@@ -58,8 +58,6 @@ export const hotColdReducer = (state=initialHotColdState, action) => {
 			return newState;
 		}
 	}
-
-
 
 	return state;
 };

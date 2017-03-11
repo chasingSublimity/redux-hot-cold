@@ -5,6 +5,8 @@ import * as reducers from './reducers/index';
 
 
 const store = createStore(
-	reducers.hotColdReducer, applyMiddleware(thunk));
+	reducers.hotColdReducer,
+	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+	applyMiddleware(thunk));
 
 export default store;

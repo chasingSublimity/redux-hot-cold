@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/index';
+import {winMessage} from '../reducers/handleFeedback';
 
 export class GuessForm extends React.Component {
 	constructor(props) {
@@ -20,6 +21,14 @@ export class GuessForm extends React.Component {
 		event.preventDefault();
 		const submittedValue = this.props.guessInputValue;
 		this.props.dispatch(actions.guessNumber(submittedValue));
+		// wait until state is updated before dispatching 
+		setTimeout(
+			() => {
+				if (this.props.feedback === winMessage) {
+					console.log('if statement entered');
+					this.props.dispatch(actions.postFewestGuesses(this.props.numberOfGuesses));
+				}
+			},500);
 	}
 
 	handleClickFetch(event) {
@@ -51,7 +60,8 @@ export class GuessForm extends React.Component {
 const mapStateToProps = (state, props) => ({
 	numberOfGuesses: state.numberOfGuesses,
 	guessInputValue: state.guessInputValue,
-	fewestGuesses: state.fewestGuesses
+	fewestGuesses: state.fewestGuesses,
+	feedback: state.feedback
 });
 
 export default connect(mapStateToProps)(GuessForm);

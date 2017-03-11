@@ -54,7 +54,7 @@ export const fetchFewestGuessesSuccess = guesses => ({
 	guesses: guesses
 });
 
-export const postFewestGuesses = (guesses) => dispatch => {
+export const postFewestGuesses = guesses => dispatch => {
 	console.log(guesses);
 	const url = 'http://localhost:8080/fewest-guesses';
 	const settings = {method: 'post', body: JSON.stringify({guesses: guesses}), headers: {'Content-Type': 'application/json'}};
@@ -65,7 +65,6 @@ export const postFewestGuesses = (guesses) => dispatch => {
 	.then(data => {
 		return dispatch(postFewestGuessesSuccess(data.fewestGuesses));
 	});
-
 };
 
 export const POST_FEWEST_GUESSES_SUCCESS = 'POST_FEWEST_GUESSES_SUCCESS';

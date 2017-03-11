@@ -1,4 +1,7 @@
-export default function handleFeedback(computerChoice, playerGuess) {
+import {postFewestGuesses} from '../actions/index';
+
+export const winMessage = 'You Won. Click new game to play again';
+export default function handleFeedback(computerChoice, playerGuess, numberOfGuesses) {
 	var difference = Math.abs(computerChoice - playerGuess);
 
 	/* Error Handling */
@@ -6,7 +9,8 @@ export default function handleFeedback(computerChoice, playerGuess) {
 		alert('Invalid Input: Please enter a number larger than 1 and less than 100.');
 
 	} else if (difference === 0) {
-		return ('You Won. Click new game to play again');
+		postFewestGuesses(numberOfGuesses);
+		return (winMessage);
 	} else if (difference <= 5) {
 		return ('extremely hot');
 	} else if (difference <= 10) {

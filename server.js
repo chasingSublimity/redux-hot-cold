@@ -11,7 +11,6 @@ const state = {
 };
 
 app.get('/fewest-guesses', function(req, res) {
-    
 	console.log('get req made to /fewest-guesses');
 	res.json(state);
 });
