@@ -1,7 +1,5 @@
-import {postFewestGuesses} from '../actions/index';
-
 export const winMessage = 'You Won. Click new game to play again';
-export default function handleFeedback(computerChoice, playerGuess, numberOfGuesses) {
+export default function handleFeedback(computerChoice, playerGuess) {
 	var difference = Math.abs(computerChoice - playerGuess);
 
 	/* Error Handling */
@@ -9,7 +7,6 @@ export default function handleFeedback(computerChoice, playerGuess, numberOfGues
 		alert('Invalid Input: Please enter a number larger than 1 and less than 100.');
 
 	} else if (difference === 0) {
-		postFewestGuesses(numberOfGuesses);
 		return (winMessage);
 	} else if (difference <= 5) {
 		return ('extremely hot');
@@ -21,3 +18,11 @@ export default function handleFeedback(computerChoice, playerGuess, numberOfGues
 		return ('cold');	
 	}
 }
+
+
+// experimentation
+// const mapStateToProps = (state, props) => ({
+// 	numberOfGuesses: state.numberOfGuesses,
+// });
+
+// export default connect(mapStateToProps)(handleFeedback);

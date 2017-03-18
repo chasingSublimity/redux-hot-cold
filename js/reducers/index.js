@@ -9,6 +9,7 @@ const initialHotColdState = {
 	guessedNumbers: [],
 	feedback: 'Make your guess below!',
 	guessInputValue: '',
+	fewestGuesses: null
 };
 
 export const hotColdReducer = (state=initialHotColdState, action) => {
@@ -18,8 +19,6 @@ export const hotColdReducer = (state=initialHotColdState, action) => {
 	switch (action.type) {
 
 	case actions.START_NEW_GAME:
-		// fetch  fewestGuesses and store in variable
-
 		newState = Object.assign({}, initialHotColdState,
 										{computerChoice: Math.round(Math.random()*(100-1) + 1)});
 		return newState;
@@ -53,10 +52,8 @@ export const hotColdReducer = (state=initialHotColdState, action) => {
 		return newState;
 
 	case actions.POST_FEWEST_GUESSES_SUCCESS:
-		if (action.guesses !== 'No update needed') {
-			newState = Object.assign({}, state, {fewestGuesses: action.guesses});
-			return newState;
-		}
+		newState = Object.assign({}, state, {fewestGuesses: action.guesses});
+		return newState;
 	}
 
 	return state;

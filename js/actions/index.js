@@ -55,7 +55,6 @@ export const fetchFewestGuessesSuccess = guesses => ({
 });
 
 export const postFewestGuesses = guesses => dispatch => {
-	console.log(guesses);
 	const url = 'http://localhost:8080/fewest-guesses';
 	const settings = {method: 'post', body: JSON.stringify({guesses: guesses}), headers: {'Content-Type': 'application/json'}};
 	return fetch(url, settings)
@@ -63,7 +62,7 @@ export const postFewestGuesses = guesses => dispatch => {
 		return response.json();
 	})
 	.then(data => {
-		return dispatch(postFewestGuessesSuccess(data.fewestGuesses));
+		return dispatch(postFewestGuessesSuccess(data));
 	});
 };
 

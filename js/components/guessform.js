@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/index';
-import {winMessage} from '../reducers/handleFeedback';
 
 export class GuessForm extends React.Component {
 	constructor(props) {
@@ -9,7 +8,6 @@ export class GuessForm extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleClickFetch = this.handleClickFetch.bind(this);
-		this.handleClickPost = this.handleClickPost.bind(this);
 	}
 
 	handleChange(event) {
@@ -21,24 +19,11 @@ export class GuessForm extends React.Component {
 		event.preventDefault();
 		const submittedValue = this.props.guessInputValue;
 		this.props.dispatch(actions.guessNumber(submittedValue));
-		// wait until state is updated before dispatching 
-		setTimeout(
-			() => {
-				if (this.props.feedback === winMessage) {
-					console.log('if statement entered');
-					this.props.dispatch(actions.postFewestGuesses(this.props.numberOfGuesses));
-				}
-			},500);
 	}
 
 	handleClickFetch(event) {
 		event.preventDefault();
 		this.props.dispatch(actions.fetchFewestGuesses());
-	}
-
-	handleClickPost(event) {
-		event.preventDefault();
-		this.props.dispatch(actions.postFewestGuesses(this.props.numberOfGuesses));
 	}
 
 	render() {
@@ -51,7 +36,6 @@ export class GuessForm extends React.Component {
 				<p>Guess #<span id="count">{this.props.numberOfGuesses}</span>!</p>
 				<p>Fewest Guessses = <span id="fewest-guesses">{this.props.fewestGuesses}</span>!</p>
 				<button onClick={this.handleClickFetch}>Fetch Guesses</button>
-				<button onClick={this.handleClickPost}>Post Guesses</button>
 			</div>
 		);
 	}
